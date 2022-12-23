@@ -1,0 +1,28 @@
+<!-- new -->
+<div class="newproducts-w3agile">
+    <div class="container">
+        <h3 class="mt-30">Categories</h3>
+            <div class="agile_top_brands_grids">
+                <div class="col-md-3 top_brand_left-1" *ngFor="let x of allcatlist">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid">
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a routerLink="/showscat" [queryParams]="{cid: x._id}">
+                                                <img src="uploads/{{x.categorypic}}" height="125" >
+                                                <p>{{x.categoryname}}</p>
+                                            </a>		
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!-- <div class="clearfix"> </div> -->
+            </div>
+    </div>
+</div>
+<!-- //new -->

@@ -1,0 +1,36 @@
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1">
+            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li class="active">Order Details</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- checkout -->
+<div class="checkout">
+    <div class="container">
+        <h3 class="w3_agile_header">Order Detail</h3>
+        <br/><br/>
+        <table class="timetable_sub">
+            <thead>
+                <tr>
+                    <th>SL No.</th>	
+                    <th>Picture</th>
+                    <th>Name</th>
+                    <th>Rate</th>
+                    <th>Quantity</th>
+                    <th>Total Cost</th>
+                </tr>
+            </thead>
+            <tr class="rem1" *ngFor="let x of orderprods; index as i">
+                <td class="invert">{{i+1}}</td>
+                <td class="invert"><img src="uploads/{{x.ppic}}" height="100"></td>
+                <td class="invert">{{x.pname}}</td>
+                <td class="invert">{{x.prate}}</td>
+                <td class="invert">{{x.qty}}</td>
+                <td class="invert">{{x.tc}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

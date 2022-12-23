@@ -1,0 +1,7 @@
+<div class="about">
+    <div class="container">
+        <h3 *ngIf="flag">You have Successfully Activated your account</h3><br>
+        <h3 *ngIf="!flag">Please try again after some time</h3><br>
+        <a routerLink="/login" *ngIf="flag">Login</a>
+    </div>
+</div>

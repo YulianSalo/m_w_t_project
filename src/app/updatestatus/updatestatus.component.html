@@ -1,0 +1,35 @@
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li class="active">Update Status</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- login -->
+<div class="login">
+    <div class="container">
+        <h2>Update Status</h2>
+    
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            <form>
+                <select name="newstatus" [(ngModel)]="newstatus" class="form-control">
+                    <option value="">Choose New Status</option>
+                    <option>Processing</option>
+                    <option>Packed</option>
+                    <option>Shipped</option>
+                    <option>In-Transit</option>
+                    <option>Out for Delivery</option>
+                    <option>Delivered</option>
+                    <option>Cancelled</option>
+                </select>
+               
+               
+                <input type="submit" name="b1" value="Update Status" (click)="updatestatus()"><br><br>
+                {{msg}}
+            </form>
+        </div>
+       
+    </div>
+</div>

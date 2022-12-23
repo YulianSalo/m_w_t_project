@@ -1,0 +1,51 @@
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1">
+            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li class="active">Your shopping cart</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- checkout -->
+<div class="checkout" *ngIf="flag">
+    <div class="container">
+        <h3 class="w3_agile_header">Shopping Cart</h3>
+        <br/><br/>
+        <div class="table">
+            <table class="timetable_sub">
+                <thead>
+                    <tr>
+                        <th>Picture</th>
+                        <th>Name</th>
+                        <th>Rate</th>
+                        <th>Quantity</th>
+                        <th>Total Cost</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tr class="rem1" *ngFor="let x of cartprods">
+                    <td class="invert"><img src="uploads/{{x.picture}}" height="100"></td>
+                    <td class="invert">{{x.prodname}}</td>
+                    <td class="invert">{{x.rate}}</td>
+                    <td class="invert">{{x.qty}}</td>
+                    <td class="invert">{{x.totalcost}}</td>
+                    <td><button type="button" class="btn btn-danger" (click)="ondelete(x._id)">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        Your total cost is Rs.{{gtotal}}<br/>
+
+        {{msg}}<br>
+        <a routerLink="/showcat">Continue Shopping</a> &nbsp;
+        <a routerLink="/checkout">Checkout</a>
+    </div>
+</div>
+
+<div class="about" *ngIf="!flag">
+    <div class="container">
+        <h3>Your cart is empty right now</h3> <br>
+        <a routerLink="/showcat">Continue Shopping</a> &nbsp;
+    </div>
+</div>

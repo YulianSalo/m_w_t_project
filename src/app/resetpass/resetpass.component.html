@@ -1,0 +1,33 @@
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li class="active">Set New Password</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- login -->
+<div class="login">
+    <div class="container">
+        <div  *ngIf="flag">
+            <h2>Set New Password</h2>
+        
+            <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+                <form>
+                <input type="password" placeholder="New Password" name="pass" [(ngModel)]="newpass" required=" " >
+                <input type="password" placeholder="Confirm New Password" name="pass" [(ngModel)]="cnewpass" required=" " >
+            
+                <input type="submit" name="b1" (click)="resetpass()" value="Reset Password"><br><br>
+                    {{msg}}
+                    
+                </form>
+            </div>
+         </div>
+        
+                <div  *ngIf="!flag">
+                    {{msg}}
+                 </div>
+         </div>
+    </div>
+

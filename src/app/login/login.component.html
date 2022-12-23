@@ -1,0 +1,25 @@
+<!-- login -->
+<div class="login">
+    <div class="container">
+        <h2>Login Form</h2>
+    
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            <form>
+                <input type="email" name="uname" [(ngModel)]="username" placeholder="Email Address" required=" " >
+                <input type="password" name="pass" [(ngModel)]="password" placeholder="Password" required=" " >
+                <br/><label><input type="checkbox" name="cbxremember" [(ngModel)]="rembme">&nbsp;Remember Me</label>
+                <div class="forgot">
+                    <a routerLink="/resetpassword">Forgot Password?</a>
+                    <!-- here use of / before forgetpasswd is required so that it creates new path -->
+                </div>
+                <input type="submit" value="Login" (click)="onlogin()">
+            </form>
+                <p>{{msg}}</p>  
+        </div>
+        <h4>For New People</h4>
+        <p><a routerLink="/signup">Register Here</a> (Or) go back to <a routerLink="/">Home<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
+        
+        
+    </div>
+</div>
+<!-- //login -->

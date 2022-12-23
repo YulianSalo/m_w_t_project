@@ -1,0 +1,40 @@
+<div class="login">
+    <div class="container">
+        <h2>Update Product</h2>
+    
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            
+            <form enctype="multipart/form-data">
+
+                <select name="category" [(ngModel)]= "category" class="form-control" (change)="fetchsubcatbycatid()">
+                <option value="">Choose Category</option>
+                <option *ngFor="let x of allcatlist" value={{x._id}}>{{x.categoryname}}</option>
+                </select>   <br>
+
+                <select name="subcat" [(ngModel)]= "subcat" class="form-control" >
+                    <option value="">Choose SubCategory</option>
+                    <option *ngFor="let x of allscatlist" value={{x._id}}>{{x.subcatname}}</option>
+                </select>   <br>
+
+                <input type="text" name="prodname" [(ngModel)]="prodname" placeholder="Product Name" > <br>
+                
+                <input type="text" name="rate" [(ngModel)]="rate" placeholder="Rate" > <br>
+                
+                <input type="text" name="disc" [(ngModel)]="disc" placeholder="Discount in % (But dont add % symbol)" > <br>
+                
+                <input type="text" name="stock" [(ngModel)]="stock" placeholder="Stock" > <br>
+               
+                <textarea name="description" [(ngModel)]="description" class="form-control" ></textarea> <br>
+
+                <img src="uploads/{{prodimg}}" height="75"><br/><br>
+
+                Choose new image, if required<br><br>
+                <input type="file" name="scatpic" (change) = "fileselected($event)"  >
+                
+                <input type="submit" name="b2" value="Update" (click)="updateprod()">
+            </form>
+                <br>  
+                <p>{{msg}}</p>  
+        </div>
+    </div>
+</div>

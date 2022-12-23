@@ -1,0 +1,67 @@
+<!-- login -->
+<div class="login">
+    <div class="container">
+        <h2>Add Product</h2>
+    
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            
+            <form enctype="multipart/form-data">
+
+                <select name="category" [(ngModel)]= "category" class="form-control" (change)="fetchsubcatbycatid()">
+                <option value="">Choose Category</option>
+                <option *ngFor="let x of allcatlist" value={{x._id}}>{{x.categoryname}}</option>
+                </select>   <br>
+
+                <select name="subcat" [(ngModel)]= "subcat" class="form-control" (change)="fetchprodbyscid()">
+                    <option value="">Choose SubCategory</option>
+                    <option *ngFor="let x of allsubcatlist" value={{x._id}}>{{x.subcatname}}</option>
+                </select>   <br>
+
+                <input type="text" name="prodname" [(ngModel)]="prodname" placeholder="Product Name" > <br>
+                
+                <input type="text" name="rate" [(ngModel)]="rate" placeholder="Rate" > <br>
+                
+                <input type="text" name="disc" [(ngModel)]="disc" placeholder="Discount in % (But dont add % symbol)" > <br>
+                
+                <input type="text" name="stock" [(ngModel)]="stock" placeholder="Stock" > <br>
+               
+                <textarea name="description" [(ngModel)]="description" class="form-control" ></textarea> <br>
+
+                <!-- for files we have input type = file -->
+                <input type="file" name="scatpic" (change) = "fileselected($event)"  >
+                
+                <input type="submit" name="b2" value="Add" (click)="addproduct()">
+            </form>
+                <br>  
+                <p id="mssg">{{msg}}</p>  
+        </div>
+    </div>
+</div>
+<!-- //login -->
+
+<div class="checkout" *ngIf="flag">
+    <div class="container">
+        <h3 class="w3_agile_header">Existing Products </h3>
+        <br><br>
+        <table class="timetable_sub">
+            <thead>
+                <tr>
+                    <th>SL No.</th>	
+                    <th>Picture</th>	
+                    <th>Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            <tr *ngFor="let x of allprodlist; index as i">
+                <td>{{i+1}}</td>
+                <td><img src="uploads/{{x.prodpic}}" height=75 ></td>
+                <td>{{x.product}}</td>
+                <td> <button type="button" class="btn btn-success" [routerLink]= "['/updateprod']" [queryParams]="{prodid:x._id}" >Update</button> </td>
+                <td> <button type="button" class="btn btn-danger" (click)=proddelete(x._id)>Delete</button> </td>
+            </tr>
+        </table>
+
+    </div>
+</div>

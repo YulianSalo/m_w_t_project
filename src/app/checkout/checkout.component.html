@@ -1,0 +1,44 @@
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li class="active">Checkout</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- login -->
+<div class="login">
+    <div class="container">
+        <h2>Checkout</h2>
+    
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            <form>
+                <textarea name="saddr"  [(ngModel)]="saddr" placeholder="Shipping Address" class="form-control"></textarea>
+                <br>
+                <select name="pmode" class="form-control" (change)="showcarddetails()"  [(ngModel)]="pmode">
+                    <option value="">Choose Payment Mode</option>
+                    <option>Cash on Delivery</option>
+                    <option value="card">Credit Card / Debit Card</option>
+                </select><br>
+                <div *ngIf="flag">
+                    <select name="coname" class="form-control"  [(ngModel)]="coname">
+                        <option value="">Choose Company Name</option>
+                        <option>Visa</option>
+                        <option>Master Card</option>
+                        <option>RuPay</option>
+                    </select><br>
+                
+                    <input type="text" name="hname" placeholder="Holder Name"  [(ngModel)]="hname"><br>
+                    <input type="text" name="cardno" placeholder="Card Number"  [(ngModel)]="cardno"><br>
+                    <input type="text" name="expmonth" placeholder="Expiry Month"  [(ngModel)]="expmonth"><br>
+                    <input type="text" name="expyear" placeholder="Expiry Year"  [(ngModel)]="expyear"><br>
+                    <input type="password" name="cvv" placeholder="CVV"  [(ngModel)]="cvv"><br>
+                 </div>
+                <input type="submit" name="b1" value="Make Payment" (click)="oncheckout()"><br><br>
+         
+            </form>
+        </div>
+       
+    </div>
+</div>

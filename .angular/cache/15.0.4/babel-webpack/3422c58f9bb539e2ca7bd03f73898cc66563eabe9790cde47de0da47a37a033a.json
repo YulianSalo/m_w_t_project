@@ -1,0 +1,1 @@
+{"ast":null,"code":"export let Conn = /*#__PURE__*/(() => {\n  class Conn {}\n  Conn.nodeurl = \"http://localhost:3000\";\n  Conn.skey = \"$@&*!(#*!(!A!Y!{!*@)!)*#)*#2)!)!#_!_!!@)(#!\";\n  //static keyword allow us to directly use the variable of the class without making its object\n  return Conn;\n})();","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

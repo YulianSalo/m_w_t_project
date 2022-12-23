@@ -1,0 +1,25 @@
+<!-- register -->
+<div class="register">
+    <div class="container">
+        <h2>Register Here</h2>
+        <div class="login-form-grids">
+            <h5>profile information</h5>
+            <form method="post">
+                <input type="text" name="pname" [(ngModel)]="nm" placeholder="Name..." required=" " >
+                <input type="text" name="phone" [(ngModel)]="phone" placeholder="Phone..." required=" "  >
+            
+                <h6>Login information</h6>
+
+                <input type="email" name="email" [(ngModel)]="email" placeholder="Email Address" required=" " >
+                <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required=" " >
+                <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" placeholder="Password Confirmation"  >
+                <input type="submit" value="Register" name="b1" (click)="onsignup()">
+                <p id="msg" style="text-align:center; margin-top:15px;">{{msg}}</p>
+            </form>
+        </div>
+        <div class="register-home">
+            <a routerLink="/">Home</a>
+        </div>
+    </div>
+</div>
+<!-- //register -->

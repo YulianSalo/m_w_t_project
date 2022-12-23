@@ -1,0 +1,56 @@
+<!-- login -->
+<div class="login">
+    <div class="container">
+        <h2>Add Sub Category</h2>
+    
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            
+            <form enctype="multipart/form-data">
+
+                <select name="category" [(ngModel)]= "category" class="form-control" (change)="fetchsubcatbycatid()">
+                <option value="">Choose Category</option>
+                <option *ngFor="let x of allcatlist" value={{x._id}}>{{x.categoryname}}</option>
+                </select>
+
+                <input type="text" name="scatname" [(ngModel)]="scatname" placeholder="Sub Category Name" > <br>
+               
+                <!-- for files we have input type = file -->
+                <input type="file" name="scatpic" (change) = "fileselected($event)"  >
+                
+                <input type="submit" name="b2" value="Add" (click)="addsubcat()">
+            </form>
+                <br>  
+                <p id="mssg">{{msg}}</p>  
+        </div>
+    </div>
+</div>
+<!-- //login -->
+
+<div class="checkout" *ngIf="flag">
+    <div class="container">
+        <h3 class="w3_agile_header">Existing Sub categories </h3>
+        <br><br>
+        <div class="table">
+            <table class="timetable_sub">
+                <thead>
+                    <tr>
+                        <th>SL No.</th>	
+                        <th>Picture</th>	
+                        <th>Name</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+    
+                <tr *ngFor="let x of allsubcatlist; index as i">
+                    <td>{{i+1}}</td>
+                    <td><img src="uploads/{{x.subcatpic}}" height=75 ></td>
+                    <td>{{x.subcatname}}</td>
+                    <td> <button type="button" class="btn btn-success" [routerLink]= "['/updatesubcat']" [queryParams]="{subcatid:x._id}" >Update</button> </td>
+                    <td> <button type="button" class="btn btn-danger" (click)=scatdelete(x._id)>Delete</button> </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>

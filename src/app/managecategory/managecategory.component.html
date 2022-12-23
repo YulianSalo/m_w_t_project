@@ -1,0 +1,60 @@
+<!-- login -->
+<div class="login">
+    <div class="container">
+        <h2>Add Category</h2>
+    
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            
+            <form enctype="multipart/form-data">
+                <input type="text" name="catname" [(ngModel)]="catname" placeholder="Category Name" > <br>
+               
+                <!-- for files we have input type = file -->
+                <input type="file" name="catpic" (change) = "fileselected($event)"  >
+                
+                <div *ngIf=flag>
+                    <br> <img src="uploads/{{catpic}}" height=75> <br>
+                    <input type="submit" name="b2" value="Update" (click)="catupdate()">
+                    <input type="submit" name="b3" value="Cancel" (click)="oncancel()">
+                </div>
+
+                <div *ngIf=!flag>
+                    <input type="submit" name="b1" value="Add" (click)="addcategory()">
+                </div>
+
+            </form>
+                <br>  
+                <p id="mssg">{{msg}}</p>  
+        </div>
+    </div>
+</div>
+<!-- //login -->
+
+
+<div class="checkout">
+    <div class="container">
+        <h3 class="w3_agile_header">Manage Category </h3>
+        <br><br>
+        <div class="table">
+            <table class="timetable_sub">
+                <thead>
+                    <tr>
+                        <th>SL No.</th>	
+                        <th>Picture</th>
+                        <th>Name</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+    
+                <tr *ngFor="let x of allcatlist; index as i">
+                    <td>{{i+1}}</td>
+                    <td><img src="uploads/{{x.categorypic}}" height=75 ></td>
+                    <td>{{x.categoryname}}</td>
+                    <td> <button type="button" class="btn btn-success" (click)=onupdate(x._id,x.categoryname,x.categorypic)>Update</button> </td>
+                    <td> <button type="button" class="btn btn-danger" (click)=catdelete(x._id)>Delete</button> </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>

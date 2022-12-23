@@ -1,0 +1,21 @@
+<!-- register -->
+<div class="register">
+    <div class="container">
+        <h2>Search User</h2>
+        <div class="login-form-grids">
+          
+            <form method="post">
+                
+                <input type="email" name="email" [(ngModel)]="uname" placeholder="Enter username to be searched... " required=" " >
+                <input type="submit" value="Search" name="b1" (click)="searchuser()">
+                 
+                <div *ngIf="flag" class="scroll">
+                {{srchuserdata.name}} <br>
+                {{srchuserdata.username}} <br>
+                {{srchuserdata.phone}} <br>
+                </div>
+                {{msg}}
+            </form>
+        </div>
+    </div>
+</div>

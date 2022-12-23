@@ -1,0 +1,28 @@
+<div class="login">
+    <div class="container">
+        <h2>Manage Sub Category</h2>
+    
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            
+            <form enctype="multipart/form-data">
+
+                <select name="category" [(ngModel)]= "category" class="form-control" >
+                <option value="">Choose Category</option>
+                <option *ngFor="let x of allcatlist" value={{x._id}}>{{x.categoryname}}</option>
+                </select>
+
+                <input type="text" name="scatname" [(ngModel)]="scatname" placeholder="Sub Category Name" > <br>
+               
+                <img src="uploads/{{subcatimg}}" height="75"><br/><br>
+
+                Choose new image, if required<br><br>
+               
+                <input type="file" name="scatpic" (change) = "fileselected($event)"  >
+                
+                <input type="submit" name="b2" value="Update" (click)="updatesubcat()">
+            </form>
+                <br>  
+                <p>{{msg}}</p>  
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<!-- login -->
+<div class="login">
+    <div class="container">
+        <h2>Change Password</h2>
+    
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            <form>
+                <input type="password" name="currpass" [(ngModel)]="currpass" placeholder="Current Password" >
+                <input type="password" name="newpass" [(ngModel)]="newpass" placeholder="New Password"  >
+                <input type="password" name="cnewpass" [(ngModel)]="cnewpass" placeholder="Confirm New Password"  >
+                
+                <input type="submit" value="Change Password" (click)="changepass()">
+            </form>
+                <br>  
+                <p>{{msg}}</p>  
+        </div>
+            
+    </div>
+</div>
+<!-- //login -->
