@@ -5,7 +5,7 @@
             <p>Welcome {{personName}} </p>
         </div>
         <div class="agile-login">
-           
+
             <ul *ngIf="!loginStatus">
                 <li><a routerLink="signup" (click)="setTitle('Signup')">Join</a></li>
                 <li><a routerLink="login" (click)="setTitle('Login')"> Login</a></li>
@@ -16,19 +16,19 @@
                 <li><a routerLink="/orderhistory" (click)="setTitle('Order History')">Orders</a></li>
                 <li><a routerLink="/changepswd" (click)="setTitle('Login')">Settings</a></li>
                 <li><a routerLink="/logout" (click)="setTitle('Signup')">logout</a></li>
-                
+
             </ul>
         </div>
 
-        <div class="product_list_header" >  
-                <form action="#" method="post" class="last" > 
+        <div class="product_list_header" >
+                <form action="#" method="post" class="last" >
                     <button class="w3view-cart" type="submit" name="submit" value="" routerLink="/showcart" *ngIf="loginStatus">
                         <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                     </button>
                     <button class="w3view-cart" type="submit" name="submit" value="" routerLink="/showcat" *ngIf="!loginStatus">
                         <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                     </button>
-                </form>  
+                </form>
         </div>
 
         <div class="clearfix"> </div>
@@ -38,13 +38,6 @@
 <div class="logo_products">
     <div class="container">
     <div class="w3ls_logo_products_left1">
-            <ul class="phone_email">
-                <li><i class="fa fa-phone" aria-hidden="true"></i>Order online or call us : (+0123) 234 567</li>
-                
-            </ul>
-        </div>
-        <div class="w3ls_logo_products_left">
-            <h1><a routerLink="/">Apni Dukaan</a></h1>
         </div>
         <div class="w3l_search">
             <form action="#" method="post">
@@ -55,7 +48,7 @@
                 <div class="clearfix"></div>
             </form>
         </div>
-        
+
         <div class="clearfix"> </div>
     </div>
 </div>
@@ -68,4 +61,4 @@
 <div *ngIf="!admin_header">
     <app-normalheader></app-normalheader>
 </div>
-    
+
