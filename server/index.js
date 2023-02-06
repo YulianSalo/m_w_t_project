@@ -3,7 +3,7 @@ const express = require("express");
 const app= express() //creates an express app
 const fs= require("fs")
 
-const dbconfig=require('./database/db');
+const mongopath = 'mongodb+srv://usrnm:ufJshsUT6WwwnERi@cluster0.agrqbot.mongodb.net/?retryWrites=true&w=majority'
 // const port = process.env.PORT || 8080;
 const port= 3000;
 
@@ -12,23 +12,33 @@ const nodemailer=require("nodemailer");
 
 app.use(express.static(__dirname));
 
-app.get("/", function(req, res) {
- res.sendFile(__dirname + "/index.html");
-});
-
 //to use urlencoded and json format
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 const mongoose = require("mongoose");
 
-// STEP-1 AFTER INSTALLATION OF MULTER
-// multer is a body pareser middleware which is used only to deal with file data or multipart/form-data
-const multer = require('multer')
+async function main() {
 
-//STEP-2 CREATE A FOLDER FOR FILE UPLOADS AND SET DIR
+  try{
+      await mongoose.connect(mongopath, {useNewUrlParser: true, useUnifiedTopology: true});
+      app.listen(port);
+      console.log(`Server is running at port ${port}`);
+  }
+  catch(err) {
+      return console.log(err);
+  }
+}
+
+app.get("/", function(req, res) {
+ res.sendFile(__dirname + "/index.html");
+});
+
+
+//for file upload via forms
+const multer = require('multer')
 const DIR='src/uploads'
 
-//take the filename into a var useful when we access it directly inside our api as well due to global scope
+
 var picname;
 
 //following is used to specify what should be our file name and where to store it
@@ -1240,16 +1250,14 @@ app.post("/api/json",(req,res)=>{
 
 })
 
+main();
 
-//server starts listening
-app.listen(port,()=>{
-    console.log("Server is running at port number 3000")
-    //callback function runs when server starts running
+//listen server close (ctrl+c)
+process.on("SIGINT", async() => {
 
-});
-
-process.on('exit', () => {
-  mongoose.connection.close();
+    await mongoose.disconnect();
+    console.log("Server stopped.");
+    process.exit();
 });
 
 //nodemon --> restart node app whenever we do some changes in our node app and start it again auto when we save
