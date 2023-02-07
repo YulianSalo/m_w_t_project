@@ -36,11 +36,11 @@ export class ActivateComponent implements OnInit {
     }
     this.accsrvobj.activateaccount(hashval).subscribe({
       next:(res)=>{
-        if(res["nModified"] ==1)
+        if(res["modifiedCount"] ==1)
             {
               this.flag=true;
-              
-            } 
+
+            }
             else
             {
               this.flag=false;

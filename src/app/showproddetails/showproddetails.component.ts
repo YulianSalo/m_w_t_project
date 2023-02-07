@@ -9,7 +9,7 @@ import { CartService } from '../cart.service';
   styleUrls: ['./showproddetails.component.css']
 })
 export class ShowproddetailsComponent implements OnInit {
-  
+
   prodid:string;
   pdetails:string[];
   pname:string;
@@ -29,10 +29,12 @@ export class ShowproddetailsComponent implements OnInit {
   cartobjid:string;
   cartprodlist:any[]
 
+  admin_header:boolean=false;
+
   constructor(
-    private myroute:ActivatedRoute, 
+    private myroute:ActivatedRoute,
     private catsrvobj:AccountsService,
-    private cartsrvobj:CartService, 
+    private cartsrvobj:CartService,
     private myrouter:Router
     ) {
     this.myroute.queryParams.subscribe(
@@ -52,6 +54,14 @@ export class ShowproddetailsComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem("usertype")== "admin")
+    {
+      this.admin_header=true;
+    }
+    else
+    {
+      this.admin_header=false;
+    }
     this.showcartprod();
   }
 
@@ -121,10 +131,10 @@ export class ShowproddetailsComponent implements OnInit {
             this.uflag=false;
           }
         }
-        
+
       },
       error:(err)=>{
-        
+
       }
     })
   }
@@ -168,12 +178,12 @@ export class ShowproddetailsComponent implements OnInit {
     if(sessionStorage.getItem("username")!=null)
     {
       var tcost=Number(this.qty)*this.remamt;
-      var mydata = {id:this.cartobjid,qty:this.qty,totalcost:tcost}
+      var mydata = {id:this.cartobjid,qty:this.qty,totalcost:tcost,username:sessionStorage.getItem("username")}
       this.cartsrvobj.updatecart(mydata).subscribe(
         {
           next:(resp:any[])=>
           {
-            if(resp["nModified"]==1)
+            if(resp["modifiedCount"]==1)
             {
               this.myrouter.navigateByUrl("/showcart");
             }
@@ -232,7 +242,7 @@ export class ShowproddetailsComponent implements OnInit {
   //   };
   //   this.cartservobj.updatecartitem(mydata).subscribe({
   //     next: (resp) => {
-  //       if (resp['nModified'] == 1) {
+  //       if (resp['modifiedCount'] == 1) {
   //         this.myrouter.navigateByUrl('/cart');
   //       } else {
   //         alert('Not Updated');

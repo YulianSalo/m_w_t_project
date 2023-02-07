@@ -42,7 +42,7 @@ export class CartService {
   {
     return this.myhttp.delete(Conn.nodeurl+ "/emptycart?un=" + sessionStorage.getItem("username") ,{responseType:"text"});
   }
-  
+
   //following is fetching order id from checkout
   fetchuserorder(uname)
   {
