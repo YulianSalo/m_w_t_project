@@ -18,8 +18,8 @@ export class AddsubcatComponent implements OnInit {
   allsubcatlist:String[];
   flag:boolean=false;
 
-  constructor(private catsrvobj: AccountsService, private myhttp:HttpClient) { 
-    
+  constructor(private catsrvobj: AccountsService, private myhttp:HttpClient) {
+
   }
 
   ngOnInit(): void {

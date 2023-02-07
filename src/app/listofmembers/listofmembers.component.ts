@@ -29,7 +29,7 @@ export class ListofmembersComponent implements OnInit {
     })
   }
 
-  // //LISTOFMEMBERS WITH SERVICE 
+  // //LISTOFMEMBERS WITH SERVICE
   // ngOnInit(): void {
 
   //   this.memlistservice.memlist().subscribe({
@@ -64,6 +64,42 @@ export class ListofmembersComponent implements OnInit {
             }
           })
     }
+}
+
+setadmin(memid)
+{
+  let type="admin"
+  this.myhttp.put(Conn.nodeurl + "/changeusertype?uid="+memid+"&type="+type,{responseType:"json"}).subscribe({
+    next:(res)=>{
+      if(res["modifiedCount"] == 1)
+      {
+        alert("User type changed Successfully!")
+        this.ngOnInit()
+        //this was the best part of todays lecture used to refresh the componenet
+      }
+    },
+    error:(err)=>{
+      this.msg=err;
+    }
+  })
+}
+
+setnormal(memid)
+{
+  let type="normal"
+  this.myhttp.put(Conn.nodeurl + "/changeusertype?uid="+memid+"&type="+type,{responseType:"json"}).subscribe({
+    next:(res)=>{
+      if(res["modifiedCount"] == 1)
+      {
+        alert("User type changed Successfully!")
+        this.ngOnInit()
+        //this was the best part of todays lecture used to refresh the componenet
+      }
+    },
+    error:(err)=>{
+      this.msg=err;
+    }
+  })
 }
 
   // LISTOFMEMBERS WITHOUT SERVICE AND CLASSES

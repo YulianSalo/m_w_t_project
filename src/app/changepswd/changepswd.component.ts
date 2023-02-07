@@ -39,15 +39,15 @@ export class ChangepswdComponent implements OnInit {
                 }
 
                 this.chngpassservice.changepass(databody).subscribe({
-          
+
                   next:(res)=>{
-                    if(res["nModified"] ==1)
+                    if(res["modifiedCount"] ==1)
                     {
                       // this.msg="Password Changed Successfully";
                       alert("Password Changed Successfully, Re-login to proceed")
                       sessionStorage.clear();
                       this.myrouter.navigateByUrl("/login");
-                    } 
+                    }
                     else
                     {
                       this.msg="Incorrect Current Password"
@@ -68,8 +68,8 @@ export class ChangepswdComponent implements OnInit {
           error:(err)=>{
               this.msg=err;
           }
-        })   
-      
+        })
+
     }
     else
     {

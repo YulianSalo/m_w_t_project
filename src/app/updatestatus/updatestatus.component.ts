@@ -13,7 +13,7 @@ export class UpdatestatusComponent implements OnInit {
   newstatus:string=""
   msg:string;
   orderid:string;
-  constructor(private cartsrvobj:CartService, private myroute:ActivatedRoute, private myhttp:HttpClient) { 
+  constructor(private cartsrvobj:CartService, private myroute:ActivatedRoute, private myhttp:HttpClient) {
 
     this.myroute.queryParams.subscribe(
       {
@@ -36,12 +36,12 @@ export class UpdatestatusComponent implements OnInit {
   updatestatus()
   {
     var data={oid:this.orderid,nstatus:this.newstatus}
-    
+
     this.cartsrvobj.updatestatus(data).subscribe(
       {
         next:(resp)=>
         {
-          if(resp["nModified"]==1)
+          if(resp["modifiedCount"]==1)
           {
             this.msg="Status Updated Successfully";
           }

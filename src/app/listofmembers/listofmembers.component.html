@@ -6,20 +6,23 @@
             <table class="timetable_sub space">
                 <thead>
                     <tr>
-                        <th>SL No.</th>	
+                        <th>SL No.</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Delete</th>
+                        <th>Admin</th>
                     </tr>
                 </thead>
-    
+
                 <tr *ngFor="let x of memblist; index as i">
                     <td>{{i+1}}</td>
                     <td>{{x.name}}</td>
                     <td>{{x.username}}</td>
                     <td>{{x.phone}}</td>
                     <td> <button type="button" class="btn btn-danger" (click)=ondelete(x._id)>Delete</button> </td>
+                    <td  *ngIf="x.usertype==='admin'"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked (click)=setnormal(x._id)></td>
+                    <td *ngIf="x.usertype==='normal'"><input class="form-check-input" type="checkbox" value="" id="flexCheck" (click)=setadmin(x._id)>
                 </tr>
             </table>
         </div>

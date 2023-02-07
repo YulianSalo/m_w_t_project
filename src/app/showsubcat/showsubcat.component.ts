@@ -15,6 +15,7 @@ export class ShowsubcatComponent implements OnInit {
   msg:string;
   cid:string;
   flag:boolean=false;
+  admin_header:boolean=false;
 
   ngOnInit(): void {
     this.myroute.queryParams.subscribe(
@@ -47,7 +48,7 @@ export class ShowsubcatComponent implements OnInit {
           this.allsubcatlist= res;
           this.flag=true;
         }
-       
+
 
       },
       error:(err)=>{
