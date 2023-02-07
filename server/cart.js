@@ -84,18 +84,14 @@ router.post("/addtocart", function(req, res)
     });
   });
 
-  // Checkout APIs
-
+  //Checkout
   router.post("/checkout", function(req, res)
   {
 
 
       console.log(req.body);
 
-      // var orddt = new Date().toLocaleString();
-
       var orddt = new Date().toLocaleString("en-GB");
-
 
       var newcheckout = new CheckoutModel({username:req.body.username, billamt:req.body.billamt,orderdt:orddt,status:req.body.status,saddress:req.body.saddress,pmode:req.body.pmode,coname:req.body.coname,cardno:req.body.cardno,holdername:req.body.holdername,cvv:req.body.cvv,exp:req.body.exp} );
 
@@ -115,8 +111,6 @@ router.post("/addtocart", function(req, res)
     });
 
     router.get("/getordernum", function(req, res) {
-
-
       CheckoutModel.find({ username: req.query.un}, function(err, data) {
         if (err)
         {
@@ -131,12 +125,12 @@ router.post("/addtocart", function(req, res)
         }
 
       }).sort({orderdt:-1});
-      //using above we are fetching all the oderes of current user
-      //by sorting it to desc- we are fetching the latest order to first
+      //sort({orderdt:-1}) used for fetching all the orders of current user
+      //by sorting it from the latest order to first
     });
 
 
-  //update stock after the successful of order
+  //update stock after the successful order
   router.put("/updatestock",function(req,res)
   {
     let updateresp;
@@ -171,13 +165,9 @@ router.post("/addtocart", function(req, res)
       }
     });
 
-    //insert order details for ordersuccess component
-
-
+//insert order details for ordersuccess component
   router.post("/orderitems",function(req,res)
   {
-
-
   var neworder=req.body;
 
   orderprodsmodel.insertMany(neworder, function (err, docs) {
@@ -210,8 +200,6 @@ router.post("/addtocart", function(req, res)
     });
   });
 
-
-  //used to take the orders inside
   router.get("/getuserorders", function(req, res) {
 
     console.log(req.query);
@@ -249,7 +237,6 @@ router.post("/addtocart", function(req, res)
     });
   });
 
-  //to show to admin
   router.get("/getallorders", function(req, res) {
         console.log(req.query);
     CheckoutModel.find(function(err, data)
@@ -269,7 +256,7 @@ router.post("/addtocart", function(req, res)
   });
 
 
-  //api to update the status of the order by the admin inside the checkout model
+//update the status of the order
   router.put("/updatetorderstatus", function(req, res) {
 
     CheckoutModel.updateOne({ _id: req.body.oid}, { $set: { status: req.body.nstatus}},function(err,data) {

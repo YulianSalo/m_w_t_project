@@ -8,23 +8,12 @@ var SignupSchema = new mongoose.Schema( {name:String,phone:String,username: {typ
   { versionKey: false } );
 
 var SignupModel = mongoose.model("signup", SignupSchema,"signup");
-// SignupModel is the way we will use the model
-//2nd singup is collection(table name)
-//1st signup is internal name of model
 
 router.post("/signup", function(req, res) {
-
-  //
-  // NOTE IN THE SIGNUPMODEL BELOW AS WE'RE SENDING THE JSON OBJECT DIRECTLY FROM THE ANGULAR CLASS, SO ITS KEYS WILL BE
-  // THE KEYS OF CLASS, SO THAT'S WHY WE HAVE TO CHANGE THE FOLLOWING MODEL APPROPRIATELY
-  //
 
   var uhash = CryptoJS.MD5(Date.now() + req.body.username).toString();
   var newsignup = new SignupModel( {name:req.body.name, phone:req.body.phone, username:req.body.username, pass:req.body.pass, usertype:req.body.usertype, userhash:uhash, activated:false} );
 
-  // newsignup is obj, we have to create an obj in order to use a model
-
-  //save fn is the way mongoose insert data inside the mongodb
   newsignup.save(function(err,data) {
     if (err)
     {
@@ -59,11 +48,6 @@ router.post("/signup", function(req, res) {
       });
 
       res.send("Signup Successfull");
-      // res.send("Thanks for registering with us ")
-      // res.send(data)
-      //data will contain all the data inserted by us along with the unique id of the user in the database
-      // helpful if we have to retrieve something from db
-
     }
 
   });
@@ -91,11 +75,10 @@ router.put("/activateaccount", function(req, res) {
 });
 
 //members list
-
 router.get("/memlist", function(req, res) {
 
   console.log(req.query);
-  //here before find we have to give the name of the model
+
   SignupModel.find(function(err, data)
   {
     if (err)
@@ -116,7 +99,6 @@ router.get("/searchuser", function(req, res) {
 
 console.log(req.query);
 
-//.find({username : req.query.queryvaraible})
 SignupModel.find({ username:req.query.uname}, function(err, data)
 {
   if (err)
@@ -176,6 +158,28 @@ SignupModel.remove({ _id: req.query.uid }, function(err, data)
 
 });
 });
+
+
+router.put("/changeusertype", function(req, res) {
+
+  console.log(req.query);
+
+  SignupModel.updateOne({ _id: req.query.uid}, {$set: {usertype: req.query.type }}, function(err, data)
+  {
+    if (err)
+    {
+      console.log(err);
+      res.send("Failed");
+    }
+    else
+    {
+      console.log(data);
+      res.send(data);
+
+    }
+
+  });
+  });
 
 
 //try

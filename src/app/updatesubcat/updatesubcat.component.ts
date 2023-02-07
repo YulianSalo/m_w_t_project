@@ -14,16 +14,16 @@ export class UpdatesubcatComponent implements OnInit {
   myfile:File;
   msg:string;
   subcatimg:string;
-  
+
   allcatlist:String[];
   allsubcatlist:String[];
 
   scid:any;
 
   constructor(private catsrvobj:AccountsService, private myroute:ActivatedRoute) {
-    
+
     this.myroute.queryParams.subscribe({
-      
+
       next:(params)=>{
         this.scid= params["subcatid"];
         this.fetchscatdetails();
@@ -31,8 +31,8 @@ export class UpdatesubcatComponent implements OnInit {
     })
   }
   //activated route is used in order to grab the query params
-  
-  
+
+
   ngOnInit(): void {
     this.fetchcat();
   }
@@ -99,7 +99,7 @@ export class UpdatesubcatComponent implements OnInit {
     this.catsrvobj.updatesubcat(mydata).subscribe(
       {
         next:(res) =>{
-          if(res['nModified']==1)
+          if(res['modifiedCount']==1)
           {
             this.msg= "Sub Category Updated Successfully"
           }
@@ -114,7 +114,7 @@ export class UpdatesubcatComponent implements OnInit {
         }
       }
     )
-    
+
   }
 
 }

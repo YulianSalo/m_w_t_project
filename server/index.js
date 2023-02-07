@@ -1,7 +1,6 @@
 // const { stringify } = require("@angular/compiler/src/util");
 const express = require("express");
 const app= express() //creates an express app
-const fs= require("fs")
 const mongoose = require("./mongoose");
 
 const mongopath = 'mongodb+srv://usrnm:ufJshsUT6WwwnERi@cluster0.agrqbot.mongodb.net/?retryWrites=true&w=majority'
@@ -15,7 +14,7 @@ const api = require("./api");
 
 app.use(express.static(__dirname));
 
-//to use urlencoded and json format
+//use urlencoded and json format
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
@@ -35,8 +34,7 @@ app.get("/", function(req, res) {
  res.sendFile(__dirname + "/index.html");
 });
 
-// and last step is to create our api
-//for cors
+//for CORS
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
@@ -52,7 +50,6 @@ app.use("/",products);
 
 app.use("/",cart);
 
-  //CONTACT US API
   var contactusSchema = new mongoose.Schema( {name:String,phone:String,emailid:String,message:String,msgdate:String }, { versionKey: false } );
   var contactusmodel = mongoose.model("contactus", contactusSchema,"contactus");
 
@@ -101,7 +98,6 @@ app.use("/",cart);
       });
     });
 
-//here we have created an API, get is http default method; / is for home directory
 app.get("/",(req,res)=>{
     res.send("Welcome to Node Js")
 

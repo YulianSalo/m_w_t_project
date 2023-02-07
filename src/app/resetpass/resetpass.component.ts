@@ -85,7 +85,7 @@ export class ResetpassComponent implements OnInit {
       }
       this.accsrvobj.setnewpass(data).subscribe({
         next:(res)=>{
-          if(res['nModified']==1)
+          if(res['modifiedCount']==1)
           {
             this.msg= "Password Changed Successfully"
           }
@@ -99,7 +99,7 @@ export class ResetpassComponent implements OnInit {
         }
       })
     }
-    
+
 
   }
 

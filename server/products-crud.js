@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require("./mongoose");
+const fs= require("fs")
 
 //for file upload via forms
 const multer = require('multer')
@@ -8,7 +9,7 @@ const DIR='src/uploads'
 
 var picname;
 
-//following is used to specify what should be our file name and where to store it
+//storage for multer
 let mystorage= multer.diskStorage({
     destination:(req, file, cb) =>{
         cb(null, DIR) //src/uploads
@@ -16,34 +17,22 @@ let mystorage= multer.diskStorage({
 
     filename:(req, file, cb) =>{
       picname = Date.now() + file.originalname;
-      // here Date.now() is a function wch changes in milliseconds and gives us the total milliseconds by
-      // calculating from midnight 1970 to now
-      // basically we are using it so that if user later upload new file with same name again, so then the earlier doesn't be overwritten
-
       cb(null, picname);
     }
 })
 
 let upload= multer({storage: mystorage});
-// upload is now the multer object with the storage cfn as we have specified
 
 var CategorySchema = new mongoose.Schema( {categoryname:String, categorypic:String}, {versionKey: false });
 var managecatmodel = mongoose.model("managecat", CategorySchema, "managecat");
 
-//file upload
-//upload is the malter object with storage as we specified and single means we are adding a single item
-//catpic is the name of the file which we have routerended in our FormData
 router.post("/addcat", upload.single('catpic'), function(req,res)
 {
 
   if (!req.file)
   {
-      //this is used to check whether or not we have send file to our api
-       picname="noimage.jpg";//if file was not uploaded then we will save default imagename in database
+       picname="noimage.jpg";
   };
-
-  // req.file is the `catpic` file
-  // req.body will hold the text fields, if there were any
 
   var newmanagecat = new managecatmodel( {categoryname:req.body.catname, categorypic:picname} );
   newmanagecat.save(function(err) {
@@ -64,7 +53,6 @@ router.post("/addcat", upload.single('catpic'), function(req,res)
 router.get("/fetchallcat", function(req, res) {
 
   console.log(req.query);
-  //here before find we have to give the name of the model
   managecatmodel.find(function(err, data)
   {
     if (err)
@@ -81,7 +69,6 @@ router.get("/fetchallcat", function(req, res) {
   });
 
 });
-
 
 var SubCategorySchema = new mongoose.Schema( {category:String , subcatname:String, subcatpic:String}, {versionKey: false });
 var managesubcatmodel = mongoose.model("managesubcat", SubCategorySchema, "managesubcat");
@@ -113,7 +100,6 @@ router.post("/addsubcat", upload.single('subcatpic'), function(req,res)
 router.get("/fetchallsubcat", function(req, res) {
 
   console.log(req.query);
-  //here before find we have to give the name of the model
   managesubcatmodel.find(function(err, data)
   {
     if (err)
@@ -133,7 +119,6 @@ router.get("/fetchallsubcat", function(req, res) {
 router.get("/fetchsubcatbycatid", function(req, res) {
 
   console.log(req.query);
-  //here before find we have to give the name of the model
   managesubcatmodel.find({ category:req.query.catid},function(err, data)
   {
     if (err)
@@ -186,8 +171,7 @@ router.post("/updatecat", upload.single('catpic'), function(req,res)
 
   if (!req.file)
   {
-       picname= req.body.oldcatpic;//if file was not uploaded this means user wants to retain old picture name in db
-       //so we are copying oldpicname into our variable so that we can store it inside our db
+       picname= req.body.oldcatpic;
   }
   else
   {
@@ -219,7 +203,6 @@ router.post("/updatecat", upload.single('catpic'), function(req,res)
 router.get("/fetchscatdetailsbyid", function(req, res) {
 
   console.log(req.query);
-  //here before find we have to give the name of the model
   managesubcatmodel.find({ _id:req.query.subcatid},function(err, data)
   {
     if (err)
@@ -237,13 +220,9 @@ router.get("/fetchscatdetailsbyid", function(req, res) {
 });
 
 router.put("/updatesubcat", upload.single("scatpic"), function (req, res) {
-  // mongoose.connect(dbconfig.mongopath, {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true
-  // });
   if (!req.file) {
     picname = req.body.oldpicname;
-    //* copying old name into variable for retaining it inside database
+    //copying old name into variable for retaining it inside database
   } else {
     if (req.body.oldpicname != "noimage.jpg") {
       fs.unlink("src/uploads/" + req.body.oldpicname, (err) => {
@@ -273,13 +252,9 @@ router.put("/updatesubcat", upload.single("scatpic"), function (req, res) {
 });
 
 router.put("/updateprod", upload.single("newprodpic"), function (req, res) {
-  // mongoose.connect(dbconfig.mongopath, {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true,
-  // });
   if (!req.file) {
     picname = req.body.oldpicname;
-    //* copying old name into variable for retaining it inside database
+    //copying old name into variable for retaining it inside database
   } else {
     if (req.body.oldpicname != "noimage.jpg") {
       fs.unlink("src/uploads/" + req.body.oldpicname, (err) => {
@@ -317,7 +292,6 @@ router.put("/updateprod", upload.single("newprodpic"), function (req, res) {
 router.get("/fetchprodbyscid", function(req, res) {
 
   console.log(req.query);
-  //here before find we have to give the name of the model
   manageprodmodel.find({ subcatname:req.query.subcatid},function(err, data)
   {
     if (err)
@@ -337,7 +311,6 @@ router.get("/fetchprodbyscid", function(req, res) {
 router.get("/fetchproddetailsbyid", function(req, res) {
 
   console.log(req.query);
-  //here before find we have to give the name of the model
   manageprodmodel.find({ _id:req.query.prodid},function(err, data)
   {
     if (err)
@@ -354,13 +327,10 @@ router.get("/fetchproddetailsbyid", function(req, res) {
   });
 });
 
-//to search a product from search field using regex
+//search a product from search field
 router.get("/fetchproductbyname", function(req, res) {
-
-
   var pname=req.query.s;
   manageprodmodel.find({product: { $regex: '.*' + pname ,$options:'i' }}, function(err,data)
-  //i means case insensitive
   {
     if (err)
     {

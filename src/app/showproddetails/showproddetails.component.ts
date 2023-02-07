@@ -29,6 +29,8 @@ export class ShowproddetailsComponent implements OnInit {
   cartobjid:string;
   cartprodlist:any[]
 
+  admin_header:boolean=false;
+
   constructor(
     private myroute:ActivatedRoute,
     private catsrvobj:AccountsService,
@@ -52,6 +54,14 @@ export class ShowproddetailsComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem("usertype")== "admin")
+    {
+      this.admin_header=true;
+    }
+    else
+    {
+      this.admin_header=false;
+    }
     this.showcartprod();
   }
 
@@ -232,7 +242,7 @@ export class ShowproddetailsComponent implements OnInit {
   //   };
   //   this.cartservobj.updatecartitem(mydata).subscribe({
   //     next: (resp) => {
-  //       if (resp['nModified'] == 1) {
+  //       if (resp['modifiedCount'] == 1) {
   //         this.myrouter.navigateByUrl('/cart');
   //       } else {
   //         alert('Not Updated');

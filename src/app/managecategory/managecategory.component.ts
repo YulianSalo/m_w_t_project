@@ -34,7 +34,7 @@ export class ManagecategoryComponent implements OnInit {
 
     var mydata= new FormData
     //here FormData is a class and we are creating an object of that class
-    //this is used instead of json object bcoz json object can't send binary data 
+    //this is used instead of json object bcoz json object can't send binary data
 
     mydata.append("catname",this.catname);
     mydata.append("catpic",this.myfile);
@@ -88,7 +88,7 @@ export class ManagecategoryComponent implements OnInit {
     this.catpic= cpic;
     this.catid= cid;
   }
-  
+
   oncancel()
   {
     this.catname=null;
@@ -102,7 +102,7 @@ export class ManagecategoryComponent implements OnInit {
     if(this.myfile != null) // user has chosen new file
     {
       mydata.append("catname",this.catname);
-      mydata.append("catpic",this.myfile);  
+      mydata.append("catpic",this.myfile);
       mydata.append("oldcatpic",this.catpic); //sent for deletion
       mydata.append("catid",this.catid);
     }
@@ -116,7 +116,7 @@ export class ManagecategoryComponent implements OnInit {
     this.catsrvobj.catupdate(mydata).subscribe(
       {
         next:(res) =>{
-          if(res['nModified']==1)
+          if(res['modifiedCount']==1)
           {
             this.msg= "Category Updated Successfully"
           }
@@ -131,7 +131,7 @@ export class ManagecategoryComponent implements OnInit {
         }
       }
     )
-    
+
   }
 
   catdelete(catid)
