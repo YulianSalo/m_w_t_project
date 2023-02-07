@@ -9,7 +9,7 @@ import { CartService } from '../cart.service';
   styleUrls: ['./showproddetails.component.css']
 })
 export class ShowproddetailsComponent implements OnInit {
-  
+
   prodid:string;
   pdetails:string[];
   pname:string;
@@ -30,9 +30,9 @@ export class ShowproddetailsComponent implements OnInit {
   cartprodlist:any[]
 
   constructor(
-    private myroute:ActivatedRoute, 
+    private myroute:ActivatedRoute,
     private catsrvobj:AccountsService,
-    private cartsrvobj:CartService, 
+    private cartsrvobj:CartService,
     private myrouter:Router
     ) {
     this.myroute.queryParams.subscribe(
@@ -121,10 +121,10 @@ export class ShowproddetailsComponent implements OnInit {
             this.uflag=false;
           }
         }
-        
+
       },
       error:(err)=>{
-        
+
       }
     })
   }
@@ -168,12 +168,12 @@ export class ShowproddetailsComponent implements OnInit {
     if(sessionStorage.getItem("username")!=null)
     {
       var tcost=Number(this.qty)*this.remamt;
-      var mydata = {id:this.cartobjid,qty:this.qty,totalcost:tcost}
+      var mydata = {id:this.cartobjid,qty:this.qty,totalcost:tcost,username:sessionStorage.getItem("username")}
       this.cartsrvobj.updatecart(mydata).subscribe(
         {
           next:(resp:any[])=>
           {
-            if(resp["nModified"]==1)
+            if(resp["modifiedCount"]==1)
             {
               this.myrouter.navigateByUrl("/showcart");
             }
