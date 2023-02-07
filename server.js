@@ -58,7 +58,7 @@ let upload= multer({storage: mystorage});
 // and last step is to create our api
 //for cors
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Origin', 'http://0.0.0.0:4200');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -111,7 +111,7 @@ app.post("/signup", function(req, res) {
           from:'doesntexist514@gmail.com',
           to:req.body.username,
           subject:'Account Activation Link',
-          html: 'To Activate you account '+ 'Click <a href= "http://localhost:4200/activate?userhash=' + uhash + '"> Here </a> '
+          html: 'To Activate you account '+ 'Click <a href= "http://0.0.0.0:4200/activate?userhash=' + uhash + '"> Here </a> '
         };
         transporter.sendMail(mailoptions,function(error,info)
         {
@@ -1101,7 +1101,7 @@ app.post("/resetpassword", function(req, res) {
                 from:'doesntexist514@gmail.com',
                 to:req.body.uname,
                 subject:'Password Reset Mail',
-                html:'Hello ' + data[0].name + "<br><br> Click on the following link to reset your password.<br><br> <a href='http://localhost:4200/resetpass?code=" + uhash + "'>Reset Password</a>"
+                html:'Hello ' + data[0].name + "<br><br> Click on the following link to reset your password.<br><br> <a href='http://0.0.0.0:4200/resetpass?code=" + uhash + "'>Reset Password</a>"
               };
               transporter.sendMail(mailoptions,function(error,info)
               {
