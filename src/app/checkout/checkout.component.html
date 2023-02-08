@@ -1,7 +1,7 @@
 <div class="breadcrumbs">
     <div class="container">
         <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li class="active">Checkout</li>
         </ol>
     </div>
@@ -11,7 +11,7 @@
 <div class="login">
     <div class="container">
         <h2>Checkout</h2>
-    
+
         <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
             <form>
                 <textarea name="saddr"  [(ngModel)]="saddr" placeholder="Shipping Address" class="form-control"></textarea>
@@ -28,7 +28,7 @@
                         <option>Master Card</option>
                         <option>RuPay</option>
                     </select><br>
-                
+
                     <input type="text" name="hname" placeholder="Holder Name"  [(ngModel)]="hname"><br>
                     <input type="text" name="cardno" placeholder="Card Number"  [(ngModel)]="cardno"><br>
                     <input type="text" name="expmonth" placeholder="Expiry Month"  [(ngModel)]="expmonth"><br>
@@ -36,9 +36,9 @@
                     <input type="password" name="cvv" placeholder="CVV"  [(ngModel)]="cvv"><br>
                  </div>
                 <input type="submit" name="b1" value="Make Payment" (click)="oncheckout()"><br><br>
-         
+
             </form>
         </div>
-       
+
     </div>
 </div>

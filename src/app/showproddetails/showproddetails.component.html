@@ -2,7 +2,7 @@
 <div class="breadcrumbs">
     <div class="container">
         <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li class="active">Product Details</li>
         </ol>
     </div>
@@ -24,7 +24,8 @@
                 </div>
                 <div class="snipcart-item block">
                     <div class="snipcart-thumb agileinfo_single_right_snipcart">
-                        <h4 class="m-sing">{{remamt}}₴ <span>{{rt}}₴</span></h4>
+                        <h4 class="m-sing">{{remamt}}₴ <span *ngIf="remamt !== rt">{{rt}}₴</span>
+                        </h4>
                     </div>
                     <div *ngIf="flag">
                         <div class="w3agile_description">
