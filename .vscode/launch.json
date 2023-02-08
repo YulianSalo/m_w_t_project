@@ -6,7 +6,7 @@
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "http://0.0.0.0:4200/#",
+      "url": "http://138.68.95.218:4200/#",
       "webRoot": "${workspaceFolder}",
       "sourceMapPathOverrides": {
         "webpack:/*": "${webRoot}/*",
@@ -20,7 +20,7 @@
       "name": "ng test",
       "type": "chrome",
       "request": "launch",
-      "url": "http://0.0.0.0:9876/debug.html",
+      "url": "http://138.68.95.218:9876/debug.html",
       "webRoot": "${workspaceFolder}",
       "sourceMaps": true,
       "sourceMapPathOverrides": {

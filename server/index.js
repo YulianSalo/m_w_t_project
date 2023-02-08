@@ -21,7 +21,7 @@ async function main() {
 
   try{
       await mongoose.connect(mongopath, {useNewUrlParser: true, useUnifiedTopology: true});
-      app.listen(port, '138.68.95.218');
+      app.listen(port);
       console.log(`Server is running at port ${port}`);
   }
   catch(err) {
