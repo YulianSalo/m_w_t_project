@@ -33,7 +33,7 @@ router.post("/signup", function(req, res) {
         from:'doesntexist514@gmail.com',
         to:req.body.username,
         subject:'Account Activation Link',
-        html: 'To Activate you account '+ 'Click <a href= "http://0.0.0.0:4200/activate?userhash=' + uhash + '"> Here </a> '
+        html: 'To Activate you account '+ 'Click <a href= "http://138.68.95.218:4200/activate?userhash=' + uhash + '"> Here </a> '
       };
       transporter.sendMail(mailoptions,function(error,info)
       {
@@ -303,7 +303,7 @@ router.post("/resetpassword", function(req, res) {
                 from:'doesntexist514@gmail.com',
                 to:req.body.uname,
                 subject:'Password Reset Mail',
-                html:'Hello ' + data[0].name + "<br><br> Click on the following link to reset your password.<br><br> <a href='http://0.0.0.0:4200/resetpass?code=" + uhash + "'>Reset Password</a>"
+                html:'Hello ' + data[0].name + "<br><br> Click on the following link to reset your password.<br><br> <a href='http://138.68.95.218:4200/resetpass?code=" + uhash + "'>Reset Password</a>"
               };
               transporter.sendMail(mailoptions,function(error,info)
               {
