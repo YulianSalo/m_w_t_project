@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
   prodid:string;
   rembme:boolean;
 
-  constructor( private cookiesrvobj: CookieService, private myrouter:Router , private loginservice:AccountsService,private myroute:ActivatedRoute) { 
-    
+  constructor( private cookiesrvobj: CookieService, private myrouter:Router , private loginservice:AccountsService,private myroute:ActivatedRoute, private router:Router) {
+
     this.myroute.queryParams.subscribe({
       next:(resp)=>{
         this.prodid=resp["pid"];
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     })
 
     const cookieExists: boolean = this.cookiesrvobj.check('usercookie');
-    
+
     if(cookieExists==true)
     {
       var userdata = JSON.parse(this.cookiesrvobj.get('usercookie'));
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
                 this.msg = "Please Activate Your Account!"
                 $("#msg").fadeIn(1000).fadeOut(2500);
               }
-              
+
             }
           },
           error:(err)=>
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
 
@@ -134,5 +134,4 @@ export class LoginComponent implements OnInit {
 }
 
 
-   
-     
+

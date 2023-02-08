@@ -9,18 +9,18 @@ router.get("/api/showmsg",(req,res)=>{
 
 router.get("/api/sum",(req,res)=>{
 
-  var a= parseInt(req.query.fno);  //variables in query string parameters
-  var b= Number(req.query.sno);
-  var sum= a + b;
+  let a= parseInt(req.query.fno);  //variables in query string parameters
+  let b= Number(req.query.sno);
+  let sum= a + b;
   res.send("sum is "+ sum);
 })
 
 router.post("/api/calcsum",(req,res)=>{
 
   console.log(req.body);
-  var a= parseInt(req.body.fno);  //variables in form data
-  var b= Number(req.body.sno);
-  var result;
+  let a= parseInt(req.body.fno);  //variables in form data
+  let b= Number(req.body.sno);
+  let result;
 
   if(req.body.operation == "add")
   {

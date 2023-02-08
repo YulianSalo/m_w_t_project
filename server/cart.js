@@ -2,19 +2,19 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require("./mongoose");
 
-var CartSchema = new mongoose.Schema( {prodid:String, prodname:String,rate:String,qty:Number,totalcost:Number,picture:String,username:String}, { versionKey: false } );
-var CartModel = mongoose.model("cart", CartSchema,"cart");
+let CartSchema = new mongoose.Schema( {prodid:String, prodname:String,rate:String,qty:Number,totalcost:Number,picture:String,username:String}, { versionKey: false } );
+let CartModel = mongoose.model("cart", CartSchema,"cart");
 
-var CheckoutSchema = new mongoose.Schema( {username:String, billamt:Number,orderdt:String,status:String,saddress:String,pmode:String,coname:String,cardno:String,holdername:String,cvv:String,exp:String}, { versionKey: false } );
-var CheckoutModel = mongoose.model("checkout", CheckoutSchema,"checkout");
+let CheckoutSchema = new mongoose.Schema( {username:String, billamt:Number,orderdt:String,status:String,saddress:String,pmode:String,coname:String,cardno:String,holdername:String,cvv:String,exp:String}, { versionKey: false } );
+let CheckoutModel = mongoose.model("checkout", CheckoutSchema,"checkout");
 
-var orderprodsSchema = new mongoose.Schema( {orderid:String,pid:String,pname:String,prate:Number,qty:Number,tc:Number,ppic:String,username:String }, { versionKey: false } );
-var orderprodsmodel = mongoose.model("orderproducts", orderprodsSchema,"orderproducts");
+let orderprodsSchema = new mongoose.Schema( {orderid:String,pid:String,pname:String,prate:Number,qty:Number,tc:Number,ppic:String,username:String }, { versionKey: false } );
+let orderprodsmodel = mongoose.model("orderproducts", orderprodsSchema,"orderproducts");
 
 router.post("/addtocart", function(req, res)
 {
     console.log(req.body);
-    var newcart = new CartModel({prodid:req.body.prodid, prodname:req.body.prodname,rate:req.body.rate,qty:req.body.qty,totalcost:req.body.totalcost,picture:req.body.picture,username:req.body.username} );
+    let newcart = new CartModel({prodid:req.body.prodid, prodname:req.body.prodname,rate:req.body.rate,qty:req.body.qty,totalcost:req.body.totalcost,picture:req.body.picture,username:req.body.username} );
     newcart.save(function(err)
     {
       if (err)
@@ -91,9 +91,9 @@ router.post("/addtocart", function(req, res)
 
       console.log(req.body);
 
-      var orddt = new Date().toLocaleString("en-GB");
+      let orddt = new Date().toLocaleString("en-GB");
 
-      var newcheckout = new CheckoutModel({username:req.body.username, billamt:req.body.billamt,orderdt:orddt,status:req.body.status,saddress:req.body.saddress,pmode:req.body.pmode,coname:req.body.coname,cardno:req.body.cardno,holdername:req.body.holdername,cvv:req.body.cvv,exp:req.body.exp} );
+      let newcheckout = new CheckoutModel({username:req.body.username, billamt:req.body.billamt,orderdt:orddt,status:req.body.status,saddress:req.body.saddress,pmode:req.body.pmode,coname:req.body.coname,cardno:req.body.cardno,holdername:req.body.holdername,cvv:req.body.cvv,exp:req.body.exp} );
 
       newcheckout.save(function(err)
       {
@@ -136,7 +136,7 @@ router.post("/addtocart", function(req, res)
     let updateresp;
 
 
-    var updatelist=req.body;
+    let updatelist=req.body;
     for(let x=0;x<updatelist.length;x++)
     {
       manageprodmodel.updateOne({_id:updatelist[x].pid},{$inc: {"stock":-updatelist[x].qty}},function(err,data)
@@ -168,7 +168,7 @@ router.post("/addtocart", function(req, res)
 //insert order details for ordersuccess component
   router.post("/orderitems",function(req,res)
   {
-  var neworder=req.body;
+  let neworder=req.body;
 
   orderprodsmodel.insertMany(neworder, function (err, docs) {
         if (err)

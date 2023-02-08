@@ -7,7 +7,7 @@ const fs= require("fs")
 const multer = require('multer')
 const DIR='src/uploads'
 
-var picname;
+let picname;
 
 //storage for multer
 let mystorage= multer.diskStorage({
@@ -23,8 +23,8 @@ let mystorage= multer.diskStorage({
 
 let upload= multer({storage: mystorage});
 
-var CategorySchema = new mongoose.Schema( {categoryname:String, categorypic:String}, {versionKey: false });
-var managecatmodel = mongoose.model("managecat", CategorySchema, "managecat");
+let CategorySchema = new mongoose.Schema( {categoryname:String, categorypic:String}, {versionKey: false });
+let managecatmodel = mongoose.model("managecat", CategorySchema, "managecat");
 
 router.post("/addcat", upload.single('catpic'), function(req,res)
 {
@@ -34,7 +34,7 @@ router.post("/addcat", upload.single('catpic'), function(req,res)
        picname="noimage.jpg";
   };
 
-  var newmanagecat = new managecatmodel( {categoryname:req.body.catname, categorypic:picname} );
+  let newmanagecat = new managecatmodel( {categoryname:req.body.catname, categorypic:picname} );
   newmanagecat.save(function(err) {
     if (err)
     {
@@ -70,8 +70,8 @@ router.get("/fetchallcat", function(req, res) {
 
 });
 
-var SubCategorySchema = new mongoose.Schema( {category:String , subcatname:String, subcatpic:String}, {versionKey: false });
-var managesubcatmodel = mongoose.model("managesubcat", SubCategorySchema, "managesubcat");
+let SubCategorySchema = new mongoose.Schema( {category:String , subcatname:String, subcatpic:String}, {versionKey: false });
+let managesubcatmodel = mongoose.model("managesubcat", SubCategorySchema, "managesubcat");
 
 router.post("/addsubcat", upload.single('subcatpic'), function(req,res)
 {
@@ -81,7 +81,7 @@ router.post("/addsubcat", upload.single('subcatpic'), function(req,res)
        picname="noimage.jpg";
   };
 
-  var newmanagesubcat = new managesubcatmodel( {category:req.body.catname, subcatname:req.body.subcatname,subcatpic:picname} );
+  let newmanagesubcat = new managesubcatmodel( {category:req.body.catname, subcatname:req.body.subcatname,subcatpic:picname} );
   newmanagesubcat.save(function(err) {
     if (err)
     {
@@ -136,10 +136,10 @@ router.get("/fetchsubcatbycatid", function(req, res) {
 });
 
 
-var ProductSchema = new mongoose.Schema( {category:String , subcatname:String, product:String,rate:Number,
+let ProductSchema = new mongoose.Schema( {category:String , subcatname:String, product:String,rate:Number,
   discount:Number, stock:Number, description:String, prodpic:String}, {versionKey: false });
 
-var manageprodmodel = mongoose.model("manageprod", ProductSchema, "manageprod");
+let manageprodmodel = mongoose.model("manageprod", ProductSchema, "manageprod");
 
 router.post("/addprod", upload.single('prodpic'), function(req,res)
 {
@@ -149,7 +149,7 @@ router.post("/addprod", upload.single('prodpic'), function(req,res)
        picname="noimage.jpg";
   };
 
-  var newmanageprod = new manageprodmodel( {category:req.body.catname, subcatname:req.body.subcatname, product:req.body.prodname,
+  let newmanageprod = new manageprodmodel( {category:req.body.catname, subcatname:req.body.subcatname, product:req.body.prodname,
     rate:req.body.rate, discount:req.body.disc, stock:req.body.stock, description: req.body.description, prodpic:picname} );
 
   newmanageprod.save(function(err) {
@@ -329,7 +329,7 @@ router.get("/fetchproddetailsbyid", function(req, res) {
 
 //search a product from search field
 router.get("/fetchproductbyname", function(req, res) {
-  var pname=req.query.s;
+  let pname=req.query.s;
   manageprodmodel.find({product: { $regex: '.*' + pname ,$options:'i' }}, function(err,data)
   {
     if (err)

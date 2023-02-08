@@ -22,6 +22,7 @@ import { ResetpassComponent } from './resetpass/resetpass.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { SearchresultsComponent } from './searchresults/searchresults.component';
 import { SearchuserComponent } from './searchuser/searchuser.component';
+import { AdminGuard } from './shared/guards/admin/admin.guard';
 import { ShowcartComponent } from './showcart/showcart.component';
 import { ShowcatComponent } from './showcat/showcat.component';
 import { ShowproddetailsComponent } from './showproddetails/showproddetails.component';
@@ -33,7 +34,7 @@ import { UpdatestatusComponent } from './updatestatus/updatestatus.component';
 import { UpdatesubcatComponent } from './updatesubcat/updatesubcat.component';
 
 const routes: Routes = [
-  
+
   {
     path:"",
     pathMatch:"full",
@@ -69,7 +70,8 @@ const routes: Routes = [
   },
   {
     path:"adminpanel",
-    component:AdminpanelComponent
+    component:AdminpanelComponent,
+    canActivate:[AdminGuard]
   },
   {
     path:"addadmin",
@@ -163,7 +165,7 @@ const routes: Routes = [
     path:"resetpass",
     component:ResetpassComponent
   },
-  
+
 ];
 
 @NgModule({

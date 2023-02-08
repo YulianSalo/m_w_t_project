@@ -1,12 +1,11 @@
-// const { stringify } = require("@angular/compiler/src/util");
 const express = require("express");
-const app= express() //creates an express app
-const mongoose = require("./mongoose");
+const app= express();
+const nodemailer=require("nodemailer");
 
 const mongopath = 'mongodb+srv://usrnm:ufJshsUT6WwwnERi@cluster0.agrqbot.mongodb.net/?retryWrites=true&w=majority'
 const port= 3000;
 
-const nodemailer=require("nodemailer");
+const mongoose = require("./mongoose");
 const authorization = require("./authorization");
 const cart = require("./cart");
 const products = require("./products-crud");
@@ -36,7 +35,7 @@ app.get("/", function(req, res) {
 
 //for CORS
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Origin', "*");
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -50,15 +49,15 @@ app.use("/",products);
 
 app.use("/",cart);
 
-  var contactusSchema = new mongoose.Schema( {name:String,phone:String,emailid:String,message:String,msgdate:String }, { versionKey: false } );
-  var contactusmodel = mongoose.model("contactus", contactusSchema,"contactus");
+  let contactusSchema = new mongoose.Schema( {name:String,phone:String,emailid:String,message:String,msgdate:String }, { versionKey: false } );
+  let contactusmodel = mongoose.model("contactus", contactusSchema,"contactus");
 
   app.post("/contactus", function(req, res)
   {
 
-      var dt = new Date().toLocaleString("en-GB");
+      let dt = new Date().toLocaleString("en-GB");
       console.log(req.body);
-      var newcontactus = new contactusmodel({name:req.body.name,phone:req.body.phone,emailid:req.body.emailid,message:req.body.message,msgdate:dt } );
+      let newcontactus = new contactusmodel({name:req.body.name,phone:req.body.phone,emailid:req.body.emailid,message:req.body.message,msgdate:dt } );
       newcontactus.save(function(err)
       {
         if (err)
@@ -68,14 +67,14 @@ app.use("/",cart);
         }
         else
         {
-          var transporter = nodemailer.createTransport({
+          let transporter = nodemailer.createTransport({
             service:'gmail',
             auth:{
               user:'doesntexist514@gmail.com',
               pass:'jufwmbexxwawoeuz'
             }
           });
-          var mailoptions={
+          let mailoptions={
             from:'smtp.angular@gmail.com',
             to:"shubamdadhwal@gmail.com",
             subject:'Mail from Website Contact Us Page',

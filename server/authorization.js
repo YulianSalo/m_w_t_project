@@ -4,15 +4,15 @@ const mongoose = require("./mongoose");
 const CryptoJS= require("crypto-js");
 const nodemailer=require("nodemailer");
 
-var SignupSchema = new mongoose.Schema( {name:String,phone:String,username: {type:String,unique:true}, pass: String, usertype:String, userhash:String, activated:Boolean},
+let SignupSchema = new mongoose.Schema( {name:String,phone:String,username: {type:String,unique:true}, pass: String, usertype:String, userhash:String, activated:Boolean},
   { versionKey: false } );
 
-var SignupModel = mongoose.model("signup", SignupSchema,"signup");
+let SignupModel = mongoose.model("signup", SignupSchema,"signup");
 
 router.post("/signup", function(req, res) {
 
-  var uhash = CryptoJS.MD5(Date.now() + req.body.username).toString();
-  var newsignup = new SignupModel( {name:req.body.name, phone:req.body.phone, username:req.body.username, pass:req.body.pass, usertype:req.body.usertype, userhash:uhash, activated:false} );
+  let uhash = CryptoJS.MD5(Date.now() + req.body.username).toString();
+  let newsignup = new SignupModel( {name:req.body.name, phone:req.body.phone, username:req.body.username, pass:req.body.pass, usertype:req.body.usertype, userhash:uhash, activated:false} );
 
   newsignup.save(function(err,data) {
     if (err)
@@ -22,14 +22,14 @@ router.post("/signup", function(req, res) {
     }
     else
     {
-      var transporter = nodemailer.createTransport({
+      let transporter = nodemailer.createTransport({
         service:'gmail',
         auth:{
           user:'doesntexist514@gmail.com',
           pass:'jufwmbexxwawoeuz'
         }
       });
-      var mailoptions={
+      let mailoptions={
         from:'doesntexist514@gmail.com',
         to:req.body.username,
         subject:'Account Activation Link',
@@ -252,8 +252,8 @@ SignupModel.updateOne({ username:req.body.uname}, {$set: {pass:req.body.npass}} 
 
 //RESET PASSWORD THROUGH EMAIL
 
-var resetpasswordschema = new mongoose.Schema({username:String,userhash:String,exptime:String}, { versionKey: false } );
-var resetpassModel = mongoose.model("resetpass",resetpasswordschema,"resetpass");
+let resetpasswordschema = new mongoose.Schema({username:String,userhash:String,exptime:String}, { versionKey: false } );
+let resetpassModel = mongoose.model("resetpass",resetpasswordschema,"resetpass");
 
 router.post("/resetpassword", function(req, res) {
 
@@ -275,14 +275,14 @@ router.post("/resetpassword", function(req, res) {
       }
       else
       {
-        var uhash = CryptoJS.MD5(Date.now() + req.body.username).toString();
-        var minutesToAdd=15;
-        var currentDate = new Date();
-        var futureDate = new Date(currentDate.getTime() + minutesToAdd*60000);
+        let uhash = CryptoJS.MD5(Date.now() + req.body.username).toString();
+        let minutesToAdd=15;
+        let currentDate = new Date();
+        let futureDate = new Date(currentDate.getTime() + minutesToAdd*60000);
         console.log(futureDate.toString());
 
         console.log(req.body);
-        var newreset = new resetpassModel({username:req.body.uname,userhash:uhash,exptime:futureDate} );
+        let newreset = new resetpassModel({username:req.body.uname,userhash:uhash,exptime:futureDate} );
         newreset.save(function(err)
         {
             if (err)
@@ -292,14 +292,14 @@ router.post("/resetpassword", function(req, res) {
             }
             else
             {
-              var transporter = nodemailer.createTransport({
+              let transporter = nodemailer.createTransport({
                  service:'gmail',
                  auth:{
                     user:'doesntexist514@gmail.com',
                     pass:'jufwmbexxwawoeuz'
                  }
               });
-              var mailoptions={
+              let mailoptions={
                 from:'doesntexist514@gmail.com',
                 to:req.body.uname,
                 subject:'Password Reset Mail',
